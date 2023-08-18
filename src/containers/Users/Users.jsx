@@ -31,7 +31,7 @@ const Users = () => {
 
   return (
     <>
-      <article className="grid grid-cols-5">
+      <article className="grid grid-cols-4">
         {data.data.map((res) => {
           return (
             <Card
@@ -43,7 +43,7 @@ const Users = () => {
           );
         })}
       </article>
-      <AddUser setShowModal={setShowModal} showModal={showModal}/>
+      <AddUser />
       <UsersDetail id={id} setShowModal={setShowModal} showModal={showModal} />
     </>
   );

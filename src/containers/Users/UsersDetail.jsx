@@ -33,7 +33,7 @@ const UsersDetail = (props ) => {
   return (
     <>
       {showModal ? (
-          <Modal title="Users Detail" setShowModal={setShowModal}>
+          <Modal classModal="w-[22rem]" title="Users Detail" setShowModal={setShowModal}>
             <CardUsersDetail result={data?data?.data:{}}/>
           </Modal>
         ) : null}
