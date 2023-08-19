@@ -1,13 +1,12 @@
-import React, { useEffect } from "react";
-import Card from "../../shared/Card/CardUsers";
-import InfiniteScroll from "react-infinite-scroller";
+import React from "react";
+import Card from "../../components/Card/CardUsers";
 import { useQuery } from "react-query";
-import services from "../../api/services";
-import UsersDetail from "./UsersDetail";
-import AddUser from "../AddUser/AddUser";
+import services from "../../shared/api/services";
+import UsersDetail from "../../components/User/UserDetail/UsersDetail";
+import AddUser from "../../components/User/AddUser/AddUser";
 const Users = () => {
   const [showModal, setShowModal] = React.useState(false);
-  const [id, setId] = React.useState("");
+  const [id, setId] = React.useState(undefined);
 
   const options = {
     method: "GET",
@@ -16,7 +15,7 @@ const Users = () => {
     setShowModal(true);
     setId(id);
   };
-  const { data, isError, error, isLoading } = useQuery(
+  const { data, isError, error, isLoading, refetch } = useQuery(
     "users",
     () => services.requestService(options),
     {
@@ -24,26 +23,19 @@ const Users = () => {
       keepPreviousData: true,
     }
   );
-  console.log(data);
 
-  if (isLoading) return <div className="loading">Data Loading.....</div>;
-  if (isError) return <div className="loading">Error? {error.toString()}</div>;
-
-  return (
+  return isLoading ? (
+    <div className="loading">Data Loading.....</div>
+  ) : isError ? (
+    <div className="loading">Error? {error?.toString()}</div>
+  ) : (
     <>
-      <article className="grid grid-cols-4">
+      <article className="grid grid-cols-5">
         {data.data.map((res) => {
-          return (
-            <Card
-              key={res.id}
-              data={res}
-              showModal={showModal}
-              onClick={handleShowModal}
-            />
-          );
+          return <Card refetch={refetch} id={id} key={res.id} data={res} onClick={handleShowModal} />;
         })}
       </article>
-      <AddUser />
+      <AddUser  refetch={refetch}/>
       <UsersDetail id={id} setShowModal={setShowModal} showModal={showModal} />
     </>
   );
