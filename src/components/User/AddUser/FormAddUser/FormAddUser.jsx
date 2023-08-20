@@ -3,7 +3,7 @@ import Input from "../../../Input/Input";
 import { useMutation } from "react-query";
 import services from "../../../../shared/api/services";
 import Button from "../../../Button/Button";
-const FormAddUser = ({ setShow, refetch }) => {
+const FormAddUser = ({ setShow, refetch, method, id }) => {
   const [data, setData] = useState({
     id: "",
     name: "",
@@ -13,7 +13,8 @@ const FormAddUser = ({ setShow, refetch }) => {
     img: "",
   });
   const options = {
-    method: "POST",
+    method: method ?? "POST",
+    apiRoute: id ? `/${id?.id}` : null,
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,8 +36,8 @@ const FormAddUser = ({ setShow, refetch }) => {
     });
     e.preventDefault();
   };
-  if(postData.isSuccess){
-   return setShow(false)
+  if (postData.isSuccess) {
+    return setShow(false);
   }
   return (
     <div>
@@ -49,7 +50,6 @@ const FormAddUser = ({ setShow, refetch }) => {
           label="Name:"
           type="text"
           placeholder="User name:"
-          required={true}
           name="name"
           value={data.name}
         />
@@ -58,7 +58,6 @@ const FormAddUser = ({ setShow, refetch }) => {
           label="Last name:"
           type="text"
           placeholder="Last name:"
-          required={true}
           name="lastName"
           value={data.lastName}
         />
@@ -67,7 +66,6 @@ const FormAddUser = ({ setShow, refetch }) => {
           label="Email:"
           type="email"
           placeholder="Email:"
-          required={true}
           name="email"
           value={data.email}
         />
@@ -76,7 +74,6 @@ const FormAddUser = ({ setShow, refetch }) => {
           label="Phone number:"
           type="text"
           placeholder="Phone number:"
-          required={true}
           name="phone"
           value={data.phone}
         />
@@ -85,7 +82,6 @@ const FormAddUser = ({ setShow, refetch }) => {
           label="Image:"
           type="url"
           placeholder="Image:"
-          required={true}
           name="img"
           value={data.img}
         />

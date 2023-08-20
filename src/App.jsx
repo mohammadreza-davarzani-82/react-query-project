@@ -1,16 +1,22 @@
 import { QueryClient, QueryClientProvider } from "react-query";
-import Users from "./containers/Users/Users";
-import {ReactQueryDevtools} from "react-query/devtools"
-
+import { ReactQueryDevtools } from "react-query/devtools";
+import Home from "./containers/Home/Home";
+import React from "react";
+import { useStore } from "./shared/util/themeStore";
 function App() {
-  const queryClient = new QueryClient()
+  const queryClient = new QueryClient();
+  // const stateTheme = useStore((state) => state.stateTheme)
+  // console.log(stateTheme)
+
   return (
-    <QueryClientProvider client={queryClient}>
-      <div className="App">
-        <Users />
-      </div>
-      <ReactQueryDevtools/> 
-    </QueryClientProvider>
+    <div>
+      <QueryClientProvider client={queryClient}>
+        <div className="App">
+          <Home />
+        </div>
+        <ReactQueryDevtools />
+      </QueryClientProvider>
+    </div>
   );
 }
 

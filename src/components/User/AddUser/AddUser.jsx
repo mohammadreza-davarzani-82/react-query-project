@@ -23,7 +23,7 @@ const AddUser = (props) => {
 
         />
         <Modal classModal="w-[30rem]"  title="Add User" setShow={setShowModal} showModal={showModal}>
-          <FormAddUser  refetch={props.refetch}  setShow={setShowModal}/>
+          <FormAddUser   refetch={props.refetch}  setShow={setShowModal}/>
         </Modal>
     </>
   );

@@ -4,11 +4,10 @@ import services from "../../../shared/api/services";
 import { useQuery } from "react-query";
 import CardUsersDetail from "../../Card/CardUsersDetail";
 
-const UsersDetail = (props) => {
-  const { showModal, id, setShowModal } = props;
+const UsersDetail = ({ showModal, id, setShow }) => {
   const options = {
     method: "GET",
-    apiRoute: `/${id}`,
+    apiRoute: id ? `/${id}` : '',
   };
 
   const { data, isError, error, refetch, isLoading } = useQuery(
@@ -35,7 +34,7 @@ const UsersDetail = (props) => {
           <Modal
             classModal="w-[22rem]"
             title="Users Detail"
-            setShow={setShowModal}
+            setShow={setShow}
             showModal={showModal}
             hidden={showModal}
           >
