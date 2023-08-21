@@ -2,16 +2,16 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import Home from "./containers/Home/Home";
 import React from "react";
-import { useStore } from "./shared/util/themeStore";
+import Navbar from "./components/Navbar/Navbar";
 function App() {
   const queryClient = new QueryClient();
-  // const stateTheme = useStore((state) => state.stateTheme)
-  // console.log(stateTheme)
+
 
   return (
     <div>
       <QueryClientProvider client={queryClient}>
         <div className="App">
+          <Navbar />
           <Home />
         </div>
         <ReactQueryDevtools />
